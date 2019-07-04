@@ -12,14 +12,16 @@ checkDirectory = os.path.isdir("src/components")
 componentName = sys.argv[1]
 
 reactClassTemplate = [
-    "import React, {Component} from 'react' \n",
-    "class" + componentName + " extends Component { \n",
-    "construct(props){ \n",
-    "super(props) \n",
+    "import React, {Component} from 'react' \n\n",
+    "class " + componentName + " extends Component { \n",
+    "\tconstruct(props) { \n",
+    "\t\tsuper(props) \n",
+    "\t} \n\n",
+    "\trender() { \n"
+    "\t\treturn 'Hello " + componentName +"'\n",
+    "\t} \n",
     "} \n",
-    "render() { \n"
-    "return Hello" + componentName + "\n",
-    "}}"
+    "export default " + componentName
 ]
 
 if systemOs == "Linux":
@@ -31,5 +33,6 @@ if systemOs == "Linux":
         component = open("src/components/" + componentName + "/" + componentName + ".js", "a")
         component.writelines(reactClassTemplate)
         component.close()
+        print("Successful create component")
     else:
         subprocess.call(["mkdir", "src/components"])
